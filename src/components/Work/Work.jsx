@@ -11,10 +11,12 @@ const projects = [
     offset: false,
   },
   {
-    title: 'Nexus SaaS Platform',
-    description: 'End-to-end design and development of a B2B analytics dashboard. Built with React, Node.js, and a custom design system — resulting in a 60% increase in user engagement.',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=1000&fit=crop&q=80',
-    alt: 'Nexus SaaS analytics dashboard interface',
+    title: 'FlowSpace',
+    description: 'All-in-one agency operations operating system designed for African creative and tech service teams. Built with React and Vite, featuring integrated project tracking, automated billable time, M-Pesa & card invoicing, and an interactive ROI calculator.',
+    image: '/flowspace.png',
+    alt: 'FlowSpace agency management operating system interface',
+    link: 'https://flowspace-group-13.vercel.app/',
+    isLive: true,
     offset: true,
   },
   {
