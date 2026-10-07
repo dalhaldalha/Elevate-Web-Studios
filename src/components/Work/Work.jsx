@@ -2,45 +2,47 @@ import styles from './Work.module.css';
 
 const projects = [
   {
+    title: 'Café Disco',
+    description: 'Bilingual (EN / AR) interactive digital experience and retro neo-brutalist bento interface for an artisan Levantine vinyl listening sanctuary & specialty coffee bar. Built with React, dynamic audio atmosphere, and live order dispatch.',
+    image: '/cafe-disco.png',
+    alt: 'Café Disco retro neo-brutalist bento website interface',
+    link: 'https://cafe-disco.vercel.app/',
+    isLive: true,
+    offset: false,
+  },
+  {
     title: 'Nexus SaaS Platform',
     description: 'End-to-end design and development of a B2B analytics dashboard. Built with React, Node.js, and a custom design system — resulting in a 60% increase in user engagement.',
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=1000&fit=crop&q=80',
     alt: 'Nexus SaaS analytics dashboard interface',
-    offset: false,
+    offset: true,
   },
   {
     title: 'Vertex Finance Rebrand',
     description: 'Complete brand identity and website redesign for a fintech startup. Delivered a conversion-optimized landing page that increased demo requests by 45%.',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=1000&fit=crop&q=80',
     alt: 'Vertex Finance fintech website redesign',
-    offset: true,
+    offset: false,
   },
   {
     title: 'Meridian Health Portal',
     description: 'HIPAA-compliant patient portal with real-time scheduling, telehealth integration, and a fully accessible interface. Reduced appointment no-shows by 35%.',
     image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=1000&fit=crop&q=80',
     alt: 'Meridian Health patient portal interface',
-    offset: false,
+    offset: true,
   },
   {
     title: 'Stratos Cloud Infrastructure',
     description: 'Marketing site and documentation hub for a cloud infrastructure company. Server-rendered Next.js site with sub-second load times and 98+ Lighthouse scores.',
     image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=1000&fit=crop&q=80',
     alt: 'Stratos cloud infrastructure marketing website',
-    offset: true,
+    offset: false,
   },
   {
     title: 'Luminary E-Commerce',
     description: 'Custom headless commerce platform built on Next.js and Shopify APIs. Achieved a 2x improvement in page speed and a 38% lift in conversion rate.',
     image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=1000&fit=crop&q=80',
     alt: 'Luminary e-commerce platform product page',
-    offset: false,
-  },
-  {
-    title: 'Arcadia Real Estate',
-    description: 'Property listing platform with interactive maps, virtual tours, and an AI-powered recommendation engine. Increased qualified leads by 52%.',
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=1000&fit=crop&q=80',
-    alt: 'Arcadia real estate platform property listings',
     offset: true,
   },
 ];
@@ -72,7 +74,18 @@ export default function Work() {
         <div className={styles.grid}>
           {projects.map((project, index) => (
             <article key={index} className={project.offset ? styles.cardOffset : styles.card}>
-              <div className={styles.imageWrap}>
+              <a
+                href={project.link || "#"}
+                className={styles.imageWrap}
+                {...(project.link ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                aria-label={`View ${project.title}`}
+              >
+                {project.isLive && (
+                  <span className={styles.liveBadge}>
+                    <span className={styles.liveDot} />
+                    Live Project
+                  </span>
+                )}
                 <img
                   src={project.image}
                   alt={project.alt}
@@ -81,11 +94,24 @@ export default function Work() {
                   width={800}
                   height={1000}
                 />
-              </div>
-              <h3 className={styles.cardTitle}>{project.title}</h3>
+              </a>
+              <h3 className={styles.cardTitle}>
+                {project.link ? (
+                  <a href={project.link} target="_blank" rel="noopener noreferrer" className={styles.titleLink}>
+                    {project.title}
+                  </a>
+                ) : (
+                  project.title
+                )}
+              </h3>
               <p className={styles.cardDesc}>{project.description}</p>
-              <a href="#" className={styles.readMore}>
-                View Case Study <span aria-hidden="true">→</span>
+              <a
+                href={project.link || "#"}
+                className={styles.readMore}
+                {...(project.link ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              >
+                {project.link ? "Visit Live Site" : "View Case Study"}{" "}
+                <span aria-hidden="true">{project.link ? "↗" : "→"}</span>
               </a>
             </article>
           ))}
