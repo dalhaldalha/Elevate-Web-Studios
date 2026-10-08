@@ -1,3 +1,5 @@
+import ScrollProgress from './components/ScrollProgress/ScrollProgress.jsx';
+import Preloader from './components/Preloader/Preloader.jsx';
 import Navbar from './components/Navbar/Navbar.jsx';
 import Hero from './components/Hero/Hero.jsx';
 import About from './components/About/About.jsx';
@@ -11,6 +13,8 @@ import Footer from './components/Footer/Footer.jsx';
 export default function App() {
   return (
     <>
+      <ScrollProgress />
+      <Preloader />
       <Navbar />
       <main>
         <Hero />

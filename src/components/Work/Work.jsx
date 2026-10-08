@@ -1,3 +1,4 @@
+import { useScrollReveal } from '../../hooks/useScrollReveal.js';
 import styles from './Work.module.css';
 
 const projects = [
@@ -56,14 +57,17 @@ const projects = [
 ];
 
 export default function Work() {
+  const headerRef = useScrollReveal({ stagger: 90 });
+  const gridRef = useScrollReveal({ observeChildren: true, stagger: 100 });
+
   return (
     <section className={styles.section} aria-label="Selected Work" id="work">
       <div className="container">
-        <div className={styles.header}>
-          <div>
+        <div ref={headerRef} className={styles.header}>
+          <div className="revealChild">
             <h2 className={styles.heading}>Selected<br />Work.</h2>
           </div>
-          <div className={styles.headerRight}>
+          <div className={`${styles.headerRight} revealChild`}>
             <p className={styles.headerText}>
               A curated selection of projects where strategy, design, and engineering converge to deliver exceptional digital products for B2B clients.
             </p>
@@ -79,9 +83,9 @@ export default function Work() {
             </div>
           </div>
         </div>
-        <div className={styles.grid}>
+        <div ref={gridRef} className={styles.grid}>
           {projects.map((project, index) => (
-            <article key={index} className={project.offset ? styles.cardOffset : styles.card}>
+            <article key={index} className={`${project.offset ? styles.cardOffset : styles.card} revealChild`}>
               <a
                 href={project.link || "#"}
                 className={styles.imageWrap}

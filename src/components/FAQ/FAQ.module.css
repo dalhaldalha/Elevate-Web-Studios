@@ -63,10 +63,16 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   overflow: hidden;
-  transition: background-color var(--transition-base);
+  transition: background-color var(--transition-base), border-color var(--transition-base);
 }
 
 .details:hover {
+  background-color: var(--color-surface-hover);
+  border-color: rgba(0, 240, 255, 0.25);
+}
+
+.details[open] {
+  border-color: rgba(0, 240, 255, 0.4);
   background-color: var(--color-surface-hover);
 }
 
@@ -156,11 +162,23 @@
 }
 
 .answer {
-  padding: 0.25rem 1.5rem 1.5rem;
+  padding: 0.5rem 1.5rem 1.5rem;
   font-size: 0.75rem;
   color: var(--color-text-secondary);
   line-height: 1.7;
   border-top: 1px solid var(--color-border);
   margin-top: 0.25rem;
   font-family: var(--font-body);
+  animation: faqExpand 240ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes faqExpand {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

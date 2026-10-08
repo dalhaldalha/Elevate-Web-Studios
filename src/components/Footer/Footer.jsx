@@ -1,17 +1,21 @@
+import { useScrollReveal } from '../../hooks/useScrollReveal.js';
 import styles from './Footer.module.css';
 
 export default function Footer() {
+  const cardRef = useScrollReveal({ stagger: 80 });
+  const metaRef = useScrollReveal();
+
   return (
     <footer className={styles.footer} id="contact">
       <div className="container">
-        <div className={styles.card}>
+        <div ref={cardRef} className={`${styles.card} revealChild revealScale`}>
           <div className={styles.cardGrid}>
             <div>
-              <h2 className={styles.heading}>Let's Build<br />Together.</h2>
-              <p className={styles.description}>
+              <h2 className={`${styles.heading} revealChild`}>Let's Build<br />Together.</h2>
+              <p className={`${styles.description} revealChild`}>
                 Ready to elevate your digital presence? Whether you need a complete website, a web application, or strategic guidance — we're here to help.
               </p>
-              <div className={styles.actions}>
+              <div className={`${styles.actions} revealChild`}>
                 <a href="mailto:hello@elevatewebstudios.com" className={styles.btnSecondary}>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                   <span>Write an Email</span>
@@ -22,7 +26,7 @@ export default function Footer() {
                 </a>
               </div>
             </div>
-            <div className={styles.rightColumn}>
+            <div className={`${styles.rightColumn} revealChild`}>
               <nav className={styles.navLinks} aria-label="Footer Navigation">
                 <a href="#work" className={styles.navLink}>Work</a>
                 <a href="#services" className={styles.navLink}>Services</a>
@@ -40,7 +44,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className={styles.meta}>
+        <div ref={metaRef} className={`${styles.meta} revealChild`}>
           <div className={styles.footerBrand}>
             <img src="/logo.png" alt="Elevate Web Studios" className={styles.footerLogo} width="20" height="20" />
             <span className={styles.footerBrandName}>Elevate Web Studios</span>

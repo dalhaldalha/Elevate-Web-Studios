@@ -1,3 +1,4 @@
+import { useScrollReveal } from '../../hooks/useScrollReveal.js';
 import styles from './Services.module.css';
 
 const services = [
@@ -36,14 +37,18 @@ const services = [
 ];
 
 export default function Services() {
+  const headerRef = useScrollReveal({ stagger: 90 });
+  const gridRef = useScrollReveal({ observeChildren: true, stagger: 80 });
+  const footerNoteRef = useScrollReveal();
+
   return (
     <section className={styles.section} aria-label="Services" id="services">
       <div className="container">
-        <div className={styles.header}>
-          <div>
+        <div ref={headerRef} className={styles.header}>
+          <div className="revealChild">
             <h2 className={styles.heading}>Services<br />We Deliver.</h2>
           </div>
-          <div className={styles.headerRight}>
+          <div className={`${styles.headerRight} revealChild`}>
             <p className={styles.headerText}>
               We offer end-to-end digital services, from initial strategy and design through to development and ongoing optimization.
             </p>
@@ -59,9 +64,9 @@ export default function Services() {
             </div>
           </div>
         </div>
-        <div className={styles.grid}>
+        <div ref={gridRef} className={styles.grid}>
           {services.map((service, index) => (
-            <div key={index} className={styles.card}>
+            <div key={index} className={`${styles.card} revealChild`}>
               <div>
                 <div className={styles.iconWrap}>{service.icon}</div>
                 <h3 className={styles.cardTitle}>{service.title}</h3>
@@ -77,7 +82,7 @@ export default function Services() {
             </div>
           ))}
         </div>
-        <p className={styles.footerNote}>
+        <p ref={footerNoteRef} className={`${styles.footerNote} revealChild`}>
           Don't see what you need? <a href="#contact" className={styles.footerLink}>Let's talk about your project.</a>
         </p>
       </div>

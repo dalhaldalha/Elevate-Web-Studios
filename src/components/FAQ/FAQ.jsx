@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useScrollReveal } from '../../hooks/useScrollReveal.js';
 import styles from './FAQ.module.css';
 
 const faqs = [
@@ -30,7 +30,8 @@ const faqs = [
 ];
 
 export default function FAQ() {
-  const listRef = useRef(null);
+  const headerRef = useScrollReveal({ stagger: 90 });
+  const listRef = useScrollReveal({ observeChildren: true, stagger: 70 });
 
   const handleToggle = (e) => {
     if (e.target.open && listRef.current) {
@@ -46,19 +47,21 @@ export default function FAQ() {
   return (
     <section className={styles.section} aria-label="Frequently Asked Questions" id="faq">
       <div className="container">
-        <div className={styles.header}>
-          <h2 className={styles.heading}>Frequently<br />Asked Questions</h2>
-          <p className={styles.headerText}>
+        <div ref={headerRef} className={styles.header}>
+          <h2 className={`${styles.heading} revealChild`}>Frequently<br />Asked Questions</h2>
+          <p className={`${styles.headerText} revealChild`}>
             Everything you need to know about working with Elevate Web Studios. Can't find what you're looking for? Reach out directly.
           </p>
-          <a href="#contact" className={styles.ctaButton}>
-            <span>Get in Touch</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </a>
+          <div className="revealChild">
+            <a href="#contact" className={styles.ctaButton}>
+              <span>Get in Touch</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
         </div>
         <div className={styles.list} ref={listRef}>
           {faqs.map((faq, index) => (
-            <details key={index} className={styles.details} onToggle={handleToggle}>
+            <details key={index} className={`${styles.details} revealChild`} onToggle={handleToggle}>
               <summary className={styles.summary}>
                 <div className={styles.summaryLeft}>
                   <span className={styles.number}>{String(index + 1).padStart(2, '0')}</span>

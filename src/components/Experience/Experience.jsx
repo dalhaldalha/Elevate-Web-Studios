@@ -1,3 +1,4 @@
+import { useScrollReveal } from '../../hooks/useScrollReveal.js';
 import styles from './Experience.module.css';
 
 const milestones = [
@@ -9,16 +10,19 @@ const milestones = [
 ];
 
 export default function Experience() {
+  const leftRef = useScrollReveal({ stagger: 90 });
+  const timelineRef = useScrollReveal({ observeChildren: true, stagger: 80 });
+
   return (
     <section className={styles.section} aria-label="Our Journey" id="journey">
       <div className="container">
         <div className={styles.grid}>
-          <div>
-            <h2 className={styles.heading}>Our Journey<br />&amp; Milestones.</h2>
-            <p className={styles.description}>
+          <div ref={leftRef}>
+            <h2 className={`${styles.heading} revealChild`}>Our Journey<br />&amp; Milestones.</h2>
+            <p className={`${styles.description} revealChild`}>
               From a two-person startup to a trusted B2B agency, our trajectory reflects a relentless commitment to quality and client success.
             </p>
-            <div className={styles.actions}>
+            <div className={`${styles.actions} revealChild`}>
               <a href="mailto:hello@elevatewebstudios.com" className={styles.btnSecondary}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                 <span>Write an Email</span>
@@ -29,10 +33,13 @@ export default function Experience() {
               </a>
             </div>
           </div>
-          <div className={styles.timeline}>
+          <div ref={timelineRef} className={styles.timeline}>
             {milestones.map((item, index) => (
-              <div key={index} className={styles.item}>
-                <div className={styles.itemDate}>{item.period}</div>
+              <div key={index} className={`${styles.item} revealChild`}>
+                <div className={styles.itemDate}>
+                  <span className={styles.milestoneDot} />
+                  {item.period}
+                </div>
                 <div className={styles.itemTitle}>{item.role}</div>
                 <div className={styles.itemCompany}>{item.company}</div>
                 <div className={styles.expandIcon}>

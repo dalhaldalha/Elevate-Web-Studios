@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useScrollReveal } from '../../hooks/useScrollReveal.js';
 import styles from './Testimonials.module.css';
 
 const testimonials = [
@@ -27,31 +28,45 @@ const testimonials = [
 
 export default function Testimonials() {
   const [current, setCurrent] = useState(0);
+  const [isFading, setIsFading] = useState(false);
 
-  const prev = () => setCurrent((c) => (c === 0 ? testimonials.length - 1 : c - 1));
-  const next = () => setCurrent((c) => (c === testimonials.length - 1 ? 0 : c + 1));
+  const headerRef = useScrollReveal({ stagger: 80 });
+  const cardRef = useScrollReveal({ stagger: 80 });
+
+  const switchSlide = (getNext) => {
+    setIsFading(true);
+    setTimeout(() => {
+      setCurrent(getNext);
+      setIsFading(false);
+    }, 180);
+  };
+
+  const prev = () => switchSlide((c) => (c === 0 ? testimonials.length - 1 : c - 1));
+  const next = () => switchSlide((c) => (c === testimonials.length - 1 ? 0 : c + 1));
 
   const t = testimonials[current];
 
   return (
     <section className={styles.section} aria-label="Testimonials">
       <div className="container">
-        <div className={styles.header}>
-          <h2 className={styles.heading}>Client Success Stories</h2>
-          <p className={styles.headerText}>
+        <div ref={headerRef} className={styles.header}>
+          <h2 className={`${styles.heading} revealChild`}>Client Success Stories</h2>
+          <p className={`${styles.headerText} revealChild`}>
             Hear directly from the teams we have partnered with to deliver transformative digital experiences.
           </p>
-          <a href="#contact" className={styles.ctaButton}>
-            <span>Get in Touch</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </a>
+          <div className="revealChild">
+            <a href="#contact" className={styles.ctaButton}>
+              <span>Get in Touch</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
         </div>
-        <div className={styles.card}>
+        <div ref={cardRef} className={`${styles.card} revealChild revealScale`}>
           <div className={styles.graphBackground} aria-hidden="true" />
           <button className={styles.prevButton} onClick={prev} aria-label="Previous Testimonial" type="button">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 19l-7-7 7-7"/></svg>
           </button>
-          <div className={styles.testimonialContent}>
+          <div className={`${styles.testimonialContent} ${isFading ? styles.fading : ''}`}>
             <span className={styles.company}>{t.company}</span>
             <blockquote className={styles.quote}>{t.quote}</blockquote>
             <div className={styles.authorInfo}>
