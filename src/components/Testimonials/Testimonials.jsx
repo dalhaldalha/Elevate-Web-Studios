@@ -54,12 +54,6 @@ export default function Testimonials() {
           <p className={`${styles.headerText} revealChild`}>
             Hear directly from the teams we have partnered with to deliver transformative digital experiences.
           </p>
-          <div className="revealChild">
-            <a href="#contact" className={styles.ctaButton}>
-              <span>Get in Touch</span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-            </a>
-          </div>
         </div>
         <div ref={cardRef} className={`${styles.card} revealChild revealScale`}>
           <div className={styles.graphBackground} aria-hidden="true" />

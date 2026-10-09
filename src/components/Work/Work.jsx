@@ -47,13 +47,6 @@ const projects = [
     isLive: true,
     offset: false,
   },
-  {
-    title: 'Luminary E-Commerce',
-    description: 'Custom headless commerce platform built on Next.js and Shopify APIs. Achieved a 2x improvement in page speed and a 38% lift in conversion rate.',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=1000&fit=crop&q=80',
-    alt: 'Luminary e-commerce platform product page',
-    offset: true,
-  },
 ];
 
 export default function Work() {
